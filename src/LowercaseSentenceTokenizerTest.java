@@ -19,7 +19,16 @@ class LowercaseSentenceTokenizerTest {
     /*
      * Write your test here!
      */
-    
+    @Test
+    void testTokenizeWithMultipleWhiteSpaces(){
+        //Arrange
+        LowercaseSentenceTokenizer tokenizer = new LowercaseSentenceTokenizer();
+        Scanner scan = new Scanner("I            came        I saw  I  record      ");
+        //Act
+        List<String> tokens = tokenizer.tokenize(scan);
+        //Assert
+        assertEquals(List.of("I","came","I","saw","I","record"), tokens);
+    }
 
     // Wave 3
     @Test
