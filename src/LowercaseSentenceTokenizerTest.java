@@ -27,7 +27,7 @@ class LowercaseSentenceTokenizerTest {
         //Act
         List<String> tokens = tokenizer.tokenize(scan);
         //Assert
-        assertEquals(List.of("I","came","I","saw","I","record"), tokens);
+        assertEquals(List.of("i","came","i","saw","i","record"), tokens);
     }
 
     // Wave 3
