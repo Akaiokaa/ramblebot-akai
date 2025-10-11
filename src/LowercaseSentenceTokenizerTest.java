@@ -59,5 +59,17 @@ class LowercaseSentenceTokenizerTest {
 
         assertEquals(List.of("hello", "world", ".", "this", "is", "dr.smith's", "example", "."), tokens);
     }
+
+    //TESTING Wave 5 debugging
+    @Test
+    void testTokenizeWithPredictNextWordTurtleString() {
+        LowercaseSentenceTokenizer tokenizer = new LowercaseSentenceTokenizer();
+        Scanner scanner = new Scanner("the quick brown fox. a quick red fox. the slow green turtle.");
+        List<String> tokens = tokenizer.tokenize(scanner);
+
+        assertEquals(List.of("the", "quick", "brown", "fox", ".", "a", "quick", "red", "fox", ".", "the", "slow", "green", "turtle", "."), tokens);
+    }
+
+
     
 }
