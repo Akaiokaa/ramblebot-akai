@@ -51,21 +51,33 @@ public class UnigramWordPredictor implements WordPredictor {
   public void train(Scanner scanner) {
     List<String> trainingWords = tokenizer.tokenize(scanner);
     // TODO: Convert the trainingWords into neighborMap here
-     Map<String, List<String>> possiblites = new HashMap();
+    // create a empty hashmap, the key will be string while the value will be string
+     Map<String, List<String>> possiblites = new HashMap<>();
 
+    // first we loop through the training words going through each word in the list
+    // next place the first token as the key while making the value a new ArrayList
     for(String word : trainingWords){
       possiblites.put(word, new ArrayList<>());
     }
+    // here we want to save the values in place1 and place2, in this case we are getting the i and i+1 places
+    // so we get pairs we can set respectively to keys and values, I also -1 on the size() as to not get an error
     for (int i = 0; i < trainingWords.size()-1; i++){
+      // Store follow up words as key/values
         String key = trainingWords.get(i);
         String value = trainingWords.get(i+1);
+
+        // loop through using entryset
         for (Map.Entry<String, List<String>> sorting : possiblites.entrySet()){
-            if(sorting.getKey().equals(key) && sorting.getKey()!= null){
-                sorting.getValue().add(value);
+          // since we have an entry of each token stored in possiblites as a key
+          // all we have to do is compare the key using equals to the keys in possiblites
+            if(sorting.getKey().equals(key)){
+              // we can then can acess the list of sortings key/value pair and directly add it to that specfic list
+              sorting.getValue().add(value);
             }
         }
     }
-    neighborMap = possiblites;
+    //link neighborMap to my HashMap
+    this.neighborMap = possiblites;
   }
 
   /**
