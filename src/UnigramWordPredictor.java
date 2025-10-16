@@ -127,7 +127,38 @@ public class UnigramWordPredictor implements WordPredictor {
   public String predictNextWord(List<String> context) {
     // TODO: Return a predicted word given the words preceding it
     // Hint: only the last word in context should be looked at
-    return null;
+    /*
+      store the size and random number to compare later
+      get frequencies of each word divide that by the size to get its probablity
+      store back inside map as <String, Double>
+      loop through again check the target random and check it against all the probablites
+      if statement to decide which word to predict next word
+     */
+    int size = context.size();
+    Double random = Math.random();
+    String predictedWord = "";
+
+    // Creates a map with exact amount of Probability frequencies
+    // This essentially does the same thing as tracking frequency but where multipleing by the orignal size and add 1 to update the value correctly
+    // Then we can divide and put it in the hashmap again with the correct value.
+    Map<String, Double> wordProbability = new HashMap<>();
+    for(String word: context){
+        if (!wordProbability.containsKey(word)) {
+            wordProbability.put(word, 1.0 / size);
+        } else {
+            wordProbability.put(word, ((wordProbability.get(word) * size + 1)) / size);
+        }
+    }
+    // Got stuck here 
+    for(Map.Entry<String, Double> checkProbability : wordProbability.entrySet()){
+        Double currentProbability = checkProbability.getValue();
+        if (currentProbability >= random){
+            predictedWord = checkProbability.getKey();
+        } else {
+            predictedWord = checkProbability.getKey();
+        }
+    }
+    return predictedWord;
   }
   
   /**
